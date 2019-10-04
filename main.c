@@ -1,5 +1,6 @@
 #include "stdlib.h"
 #include "stdio.h"
+#include "stdbool.h"
 
 struct node
 {
@@ -7,7 +8,9 @@ struct node
     struct node *next;
 };
 
-struct node *push(struct node *head, int newElement)
+struct node *top = NULL;
+
+void push(int newElement)
 {
 
     struct node *newNode, *temp;
@@ -15,11 +18,11 @@ struct node *push(struct node *head, int newElement)
     newNode = (struct node *)malloc(sizeof(struct node));
     newNode->element = newElement;
     newNode->next = NULL;
-    temp = head;
+    temp = top;
 
-    if(head == NULL)
+    if(top == NULL)
     {
-        head = newNode;
+        top = newNode;
     }
 
     else
@@ -31,7 +34,22 @@ struct node *push(struct node *head, int newElement)
         temp->next = newNode;
     }
 
-    return head;
+}
+
+
+void pop()
+{
+    struct node *temp = top;
+    struct node *temp2 = top;
+
+    while(temp->next != NULL)
+    {
+        temp2 = temp;
+        temp = temp->next;
+    }
+
+    temp2->next = NULL;
+    free(temp);
 }
 
 void printList(struct node *head)
@@ -46,13 +64,51 @@ void printList(struct node *head)
     printf("\n");
 }
 
+bool isEmpty()
+{
+    if(top == NULL)
+    {
+        return true;
+    }
+    else
+        return false;
+}
+
+int returnTopElement()
+{
+    struct node *temp = top;
+
+    while(temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    return (temp->element);
+}
+
 
 int main()
 {
-    struct node *head = NULL;
-    head = push(head, 10);
-    head = push(head, 15);
+    bool result;
+    result = isEmpty();
 
-    printList(head);
+    if(result == true)
+        printf("Your stack is empty\n");
+    else
+        printf("Your stack is not empty\n");
+
+    printf("Pushing elements\n");
+    push(10);
+    push(15);
+    push(20);
+    push(25);
+    printList(top);
+    printf("Popping elements\n");
+    pop();
+    pop();
+    printList(top);
+    int topElement;
+    topElement = returnTopElement();
+    printf("The value of the top element is %d", topElement);
+
     return 0;
 }

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1570196388 source:c:\users\bress\documents\gitprojects\singlylinkedliststack\main.c
+	"stdlib.h"
+	"stdio.h"
+	"stdbool.h"
+
