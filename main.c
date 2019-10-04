@@ -7,11 +7,10 @@ struct node
     struct node *next;
 };
 
-struct node push(struct node *head, int newElement)
+struct node *push(struct node *head, int newElement)
 {
-    struct node *newNode;
 
-       struct node *newNode, *temp;
+    struct node *newNode, *temp;
 
     newNode = (struct node *)malloc(sizeof(struct node));
     newNode->element = newElement;
@@ -32,18 +31,28 @@ struct node push(struct node *head, int newElement)
         temp->next = newNode;
     }
 
-    size++;
     return head;
 }
 
+void printList(struct node *head)
+{
+    struct node *temp = head;
+
+    while(temp != NULL)
+    {
+        printf("%d ", temp->element);
+        temp = temp->next;
+    }
+    printf("\n");
+}
 
 
 int main()
 {
     struct node *head = NULL;
-    push(head, 10);
-    push(head, 15);
+    head = push(head, 10);
+    head = push(head, 15);
 
-
+    printList(head);
     return 0;
 }
