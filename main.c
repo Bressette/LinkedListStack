@@ -42,6 +42,11 @@ void pop()
     struct node *temp = top;
     struct node *temp2 = top;
 
+    if(top == NULL)
+        printf("Your stack is empty");
+
+    else
+    {
     while(temp->next != NULL)
     {
         temp2 = temp;
@@ -50,6 +55,7 @@ void pop()
 
     temp2->next = NULL;
     free(temp);
+    }
 }
 
 void printList(struct node *head)
